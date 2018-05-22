@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract PublicResolver is Ownable {
     event AddrSet(bytes32 indexed node, address a, bytes32 tag);
@@ -20,9 +20,5 @@ contract PublicResolver is Ownable {
 
     function addr(bytes32 node, bytes32 tag) public view returns (address) {
         return records[node][tag];
-    }
-
-    function supportsInterface(bytes4 interfaceID) public pure returns (bool) {
-        return true;
     }
 }
