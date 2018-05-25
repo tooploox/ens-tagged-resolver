@@ -11,22 +11,22 @@ contract PublicResolver is Ownable {
   constructor() public {}
 
   function setAddr(bytes32 node, address addr) public onlyOwner {
-    setAddr(node, addr, defaultTag());
+    setAddrForTag(node, addr, defaultTag());
   }
 
-  function setAddr(bytes32 node, address addr, bytes32 tag) public onlyOwner {
-    require(node != 0, "Node must be set");
-    require(addr != 0, "Address must be set");
-    require(tag != 0, "Tag must be set");
+  function setAddrForTag(bytes32 node, address addr, bytes32 tag) public onlyOwner {
+    require(node != 0, "node(bytes32) param is required");
+    require(addr != 0, "address(address) param is required");
+    require(tag != 0, "tag(bytes32) param is required");
     records[node][tag] = addr;
     emit AddrSet(node, addr, tag);
   }
 
   function addr(bytes32 node) public view returns (address) {
-    return addr(node, defaultTag());
+    return addrForTag(node, defaultTag());
   }
 
-  function addr(bytes32 node, bytes32 tag) public view returns (address) {
+  function addrForTag(bytes32 node, bytes32 tag) public view returns (address) {
     return records[node][tag];
   }
 

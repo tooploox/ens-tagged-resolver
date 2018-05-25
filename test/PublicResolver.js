@@ -16,8 +16,8 @@ contract("PublicResolverTest", (accounts) => {
   });
 
   describe("setAddr", () => {
-    it("emits event when setting custom tag", async () => {
-      const tx = await publicResolver.setAddr(node, addr, tag);
+    it("emits an event when setting a custom tag", async () => {
+      const tx = await publicResolver.setAddrForTag(node, addr, tag);
       const [AddrSet] = tx.logs;
 
       expect(AddrSet.event).to.equal("AddrSet");
