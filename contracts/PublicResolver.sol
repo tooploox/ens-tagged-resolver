@@ -1,40 +1,48 @@
-pragma solidity ^0.4.24;
+pragma solidity 0.4.24;
 
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "./TaggedResolverInterface.sol";
 
 
-contract PublicResolver is Ownable {
+contract PublicResolver is TaggedResolverInterface, Ownable {
   bytes4 constant INTERFACE_META_ID = 0x01ffc9a7;
   bytes4 constant ADDR_INTERFACE_ID = 0x3b3b57de;
 
-  event AddrSet(bytes32 indexed node, address addr, bytes32 tag);
+  event AddrChanged(bytes32 indexed node, address a);
+  event AddrChangedForTag(bytes32 indexed node, address a, bytes32 tag);
 
   mapping (bytes32 => mapping (bytes32 => address)) records;
 
   constructor() public {}
 
-  function setAddr(bytes32 node, address addr) public onlyOwner {
-    setAddrForTag(node, addr, defaultTag());
+  function setAddr(bytes32 _node, address _addr) public onlyOwner {
+    doSetAddrForTag(_node, _addr, defaultTag());
+    emit AddrChanged(_node, _addr);
   }
 
-  function setAddrForTag(bytes32 node, address addr, bytes32 tag) public onlyOwner {
-    require(node != 0, "node(bytes32) param is required");
-    require(addr != 0, "address(address) param is required");
-    require(tag != 0, "tag(bytes32) param is required");
-    records[node][tag] = addr;
-    emit AddrSet(node, addr, tag);
+  function setAddrForTag(bytes32 _node, address _addr, bytes32 _tag) public onlyOwner {
+    doSetAddrForTag(_node, _addr, _tag);
   }
 
-  function addr(bytes32 node) public view returns (address) {
-    return addrForTag(node, defaultTag());
+  function doSetAddrForTag(bytes32 _node, address _addr, bytes32 _tag) private {
+    require(_node != 0, "node is required");
+    require(_addr != 0, "address is required");
+    require(_tag != 0, "tag is required");
+    records[_node][_tag] = _addr;
+    emit AddrChangedForTag(_node, _addr, _tag);
   }
 
-  function addrForTag(bytes32 node, bytes32 tag) public view returns (address) {
-    return records[node][tag];
+  function addr(bytes32 _node) public view returns (address) {
+    return addrForTag(_node, defaultTag());
   }
 
-  function supportsInterface(bytes4 interfaceID) public view returns (bool) {
-    return interfaceID == ADDR_INTERFACE_ID || interfaceID == INTERFACE_META_ID;
+  function addrForTag(bytes32 _node, bytes32 _tag) public view returns (address) {
+    return records[_node][_tag];
+  }
+
+  function supportsInterface(bytes4 _interfaceID) public pure returns (bool) {
+    return _interfaceID == ADDR_INTERFACE_ID ||
+           _interfaceID == INTERFACE_META_ID;
   }
 
   function defaultTag() private pure returns (bytes32) {
