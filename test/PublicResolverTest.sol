@@ -52,4 +52,10 @@ contract PublicResolverTest {
     bool result = address(publicResolver).call(bytes4(keccak256("setAddrForTag(bytes32,address,bytes32)")), bytes32("test"), ADDR, bytes32(""));
     Assert.equal(result, false, "it doesn't fail when setting a custom tag");
   }
+
+  function testSupportingInterface() public {
+    Assert.equal(publicResolver.supportsInterface(0x01ffc9a7), true, "it doesn't support 0x01ffc9a7 interface");
+    Assert.equal(publicResolver.supportsInterface(0x3b3b57de), true, "it doesn't support 0x3b3b57de interface");
+    Assert.equal(publicResolver.supportsInterface(0x11111111), false, "it supports invalid interface");
+  }
 }
