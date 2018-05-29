@@ -12,8 +12,8 @@ contract("PublicResolver", (accounts) => {
       publicResolver = await PublicResolver.new();
     });
 
-    const node = web3.fromUtf8("test-node");
     const addr = accounts[0];
+    const node = web3.fromUtf8("test-node");
     const tag = web3.fromUtf8("123456789");
 
     describe("setAddrForTag", () => {
@@ -26,10 +26,10 @@ contract("PublicResolver", (accounts) => {
 
     describe("setAddr", () => {
       it("sets an address for default tag", async () => {
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, node, 'default')).not.to.equal(addr);
+        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, node, "default")).not.to.equal(addr);
         expect(await taggedResolverUtils.getAddr(publicResolver.address, node)).not.to.equal(addr);
         await taggedResolverUtils.setAddr(publicResolver.address, node, addr);
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, node, 'default')).to.equal(addr);
+        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, node, "default")).to.equal(addr);
         expect(await taggedResolverUtils.getAddr(publicResolver.address, node)).to.equal(addr);
       });
     });
