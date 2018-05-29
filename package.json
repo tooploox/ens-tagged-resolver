@@ -28,9 +28,11 @@
   },
   "homepage": "https://github.com/tooploox/ens-tagged-resolver#readme",
   "dependencies": {
+    "openzeppelin-solidity": "1.9.0",
+    "truffle": "^4.1.11"
+  },
+  "devDependencies": {
     "chai": "^4.1.2",
-    "solium": "^1.1.7",
-    "truffle": "^4.1.9",
-    "zeppelin-solidity": "^1.9.0"
+    "solium": "^1.1.7"
   }
 }
