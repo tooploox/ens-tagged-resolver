@@ -1,0 +1,36 @@
+{
+  "name": "ens-tagged-resolver",
+  "version": "1.0.0",
+  "description": "ENS-compatible resolver supporting tags",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "lint": "npm run lint:sol",
+    "lint:sol": "solium -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tooploox/ens-tagged-resolver.git"
+  },
+  "keywords": [
+    "ens",
+    "resolver",
+    "ethereum",
+    "blockchain"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tooploox/ens-tagged-resolver/issues"
+  },
+  "homepage": "https://github.com/tooploox/ens-tagged-resolver#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "solium": "^1.1.7",
+    "truffle": "^4.1.9",
+    "zeppelin-solidity": "^1.9.0"
+  }
+}
