@@ -43,6 +43,11 @@ contract PublicResolverTest {
     Assert.equal(result, false, "it doesn't fail when setting an address");
   }
 
+  function testPreventingFromAddingZeroAddress() public {
+    bool result = address(publicResolver).call(bytes4(keccak256("setAddr(bytes32,address)")), bytes32("test"), "0x0");
+    Assert.equal(result, false, "it doesn't fail when setting 0x0 address");
+  }
+
   function testPreventingFromAddingAddressWithMissingCustomTag() public {
     bool result = address(publicResolver).call(bytes4(keccak256("setAddrForTag(bytes32,address,bytes32)")), bytes32("test"), ADDR, bytes32(""));
     Assert.equal(result, false, "it doesn't fail when setting a custom tag");
