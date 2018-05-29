@@ -12,7 +12,7 @@ contract PublicResolverTest {
     Assert.equal(publicResolver.owner(), address(this), "an owner's address is invalid");
   }
 
-  function beforeEach() {
+  function beforeEach() public {
     publicResolver = new PublicResolver();
   }
 

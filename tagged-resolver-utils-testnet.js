@@ -191,3 +191,7 @@ var taggedResolverUtils = {
     return resolver.addrForTag(node, tag, { from: web3.eth.accounts[0] });
   }
 };
+
+if(typeof module !== "undefined") {
+  module.exports.taggedResolverUtils = taggedResolverUtils;
+}
