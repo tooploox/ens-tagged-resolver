@@ -41,8 +41,7 @@ contract PublicResolver is TaggedResolverInterface, Ownable {
   }
 
   function supportsInterface(bytes4 _interfaceID) public pure returns (bool) {
-    return _interfaceID == ADDR_INTERFACE_ID ||
-           _interfaceID == INTERFACE_META_ID;
+    return _interfaceID == ADDR_INTERFACE_ID || _interfaceID == INTERFACE_META_ID;
   }
 
   function defaultTag() private pure returns (bytes32) {
