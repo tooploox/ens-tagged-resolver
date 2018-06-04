@@ -8,7 +8,7 @@ Have you ever experienced a problem with managing addresses withing multiple env
 
 You can deploy this contract on your own and specify names that point to specific addresses in Ethereum network. Each of address can be additionally tagged ('v1', 'test', 'dev', etc.). 
 
-The contract is also compatible with [ENS (Ethereum Name Service)](https://docs.ens.domains/en/latest/implementers.html#writing-a-resolver), however during rapid development time, you don't need to register the domain. Once you decide that you want to register it, you can point your ENS address to this resolver.  
+The contract is also compatible with [ENS (Ethereum Name Service)](https://docs.ens.domains/en/latest/implementers.html#writing-a-resolver), however during rapid development time, you don't need to register the domain, since our Utils script (described in 'Usage' section below) allows to explicitly point to resolver's address (without relying on official ENS). Once you decide that you want to register the domain, you can point your ENS domain to this resolver.  
 
 ## Resolver's public interface
 
@@ -42,7 +42,7 @@ In nodeJS you can require the module:
 const { taggedResolverUtils } = require("tagged-resolver-utils");
 ```
 
-Now you can assign an address to any domain by `setAddr(resolverAddress, address, domain)` function. The address will be tagged as `default`. 
+Now you can assign an address to any domain by `setAddr(resolverAddress, address, domain)` function. The address will be tagged as `default`. The `resolverAddress` argument is the address of deployed `PublicResolver` contract.
 
 
 ```js
