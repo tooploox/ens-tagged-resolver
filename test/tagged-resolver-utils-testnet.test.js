@@ -2,7 +2,7 @@ const chai = require("chai");
 const { expect } = chai;
 
 const PublicResolver = artifacts.require("../contracts/PublicResolver.sol");
-const { taggedResolverUtils } = require("../tagged-resolver-utils-testnet");
+const { taggedResolverUtils } = require("../tagged-resolver-utils");
 
 contract("PublicResolver", (accounts) => {
   describe("taggedResolverUtils", () => {

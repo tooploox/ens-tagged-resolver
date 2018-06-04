@@ -1,8 +1,16 @@
-# ens-tagged-resolver
+# Tagged Public Resolver
 
-Simple resolver implementation that allows the owner of a contract to configure how set name should resolve to specific address.
+A simple implementation of a public resolver that points unique names to the addresses to simplify managing and synchronizing addresses within the project. This version allows you to set names together with tags as well.
 
-## Resolver's interface
+## Why it's useful?
+
+Have you ever experienced a problem with managing addresses withing multiple environments (dev/test/staging/production)? Have you had a problem with synchronizing them within the team of developers. Does your infrastructure consist of smart contracts and oracles? If so, Tagged Public Resolver can be useful for you. 
+
+You can deploy this contract on your own and specify names that point to specific addresses in Ethereum network. Each of address can be additionally tagged ('v1', 'test', 'dev', etc.). 
+
+The contract is also compatible with [ENS (Ethereum Name Service)](https://docs.ens.domains/en/latest/implementers.html#writing-a-resolver), however during rapid development time, you don't need to register the domain. Once you decide that you want to register it, you can point your ENS address to this resolver.  
+
+## Resolver's public interface
 
 ### setAddr(bytes32 node, address addr)
 Sets a new address of a specified node. This method sets a `default` tag for given node. Every call of this function overwrites previous address. Only the current owner may call this function.
@@ -18,25 +26,47 @@ This method allows user to get a current address for specified node and tag.
 
 ## Usage
 
-Before we start, let’s download `tagged-resolver-utils-testnet.js` which contains a few ABIs and helper functions that will make the process more straightforward.
+We prepared a set of helpers that make the process more straightforward.
+
+First, you have to download the `tagged-resolver-utils.js` file from this github repository which contains ABI of the contract and helper functions.
+
+Than you have to load the file. In `geth` console you can do as follows: 
 
 ```
-loadScript('./tagged-resolver-utils-testnet.js')
+loadScript('./tagged-resolver-utils.js')
 ```
 
-To assign address to a node with `default` tag you can use the `setAddr` method. If you want to specify custom tag use the `setAddrForTag` method.
+In nodeJS you can require the module:
 
-```
-taggedResolverUtils.setAddr('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'test.eth', '0x969d74cbffb2ccca12876cd2150199b7866637f5');
-taggedResolverUtils.setAddrForTag('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'test.eth', '0x969d74cbffb2ccca12876cd2150199b7866637f5', 'test');
+```js
+const { taggedResolverUtils } = require("tagged-resolver-utils");
 ```
 
-To fetch address use the `getAddr` method or `getAddrForTag` if custom tag has been specified.
+Now you can assign an address to any domain by `setAddr(resolverAddress, address, domain)` function. The address will be tagged as `default`. 
 
+
+```js
+taggedResolverUtils.setAddr('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth', '0x969d74cbffb2ccca12876cd2150199b7866637f5');
 ```
-taggedResolverUtils.getAddr('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'test.eth');
-taggedResolverUtils.getAddrForTag('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'test.eth', 'test');
+
+To check the address use the `getAddr(resolverAddress, domain)` function. It will return an address for `defualt` tag.
+
+```js
+taggedResolverUtils.getAddr('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth');
 ```
+
+You can also specify any other tag by `setAddrForTag(resolverAddress, address, domain, tag)` function
+
+```js
+taggedResolverUtils.setAddrForTag('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth', '0x969d74cbffb2ccca12876cd2150199b7866637f5', 'production');
+```
+
+To check the address for specific tag you have to use `getAddrForTag(resolverAddress, tag)` function.
+
+```js
+taggedResolverUtils.getAddrForTag('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth', 'production');
+```
+
 
 ## Contributing to repository
 Any kind of contribution is welcomed.
