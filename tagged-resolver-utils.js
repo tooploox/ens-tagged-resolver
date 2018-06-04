@@ -189,6 +189,13 @@ var taggedResolverUtils = {
     var resolver = this.PublicResolver.at(resolverAddress);
 
     return resolver.addrForTag(node, tag, { from: web3.eth.accounts[0] });
+  },
+  setTagAsDefault: function setAddr(resolverAddress, domain, tag) {
+    var node = this.namehash(domain);
+    var resolver = this.PublicResolver.at(resolverAddress);
+
+    var addr = resolver.addrForTag(node, tag, { from: web3.eth.accounts[0] });
+    return resolver.setAddr(node, addr, { from: web3.eth.accounts[0] });
   }
 };
 
