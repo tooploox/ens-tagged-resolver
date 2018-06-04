@@ -67,6 +67,12 @@ To check the address for specific tag you have to use `getAddrForTag(resolverAdd
 taggedResolverUtils.getAddrForTag('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth', 'production');
 ```
 
+There is a possibility to set existing tag as default by `setTagAsDefault(resolverAddress, tag)` function.
+
+```js
+taggedResolverUtils.setTagAsDefault('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth', 'v1');
+```
+
 
 ## Contributing to repository
 Any kind of contribution is welcomed.
