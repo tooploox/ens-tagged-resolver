@@ -166,31 +166,31 @@ var taggedResolverUtils = {
       "type": "function"
     }
   ]),
-  setAddr: function setAddr(resolverAddress, domain, address) {
+  setAddr: function(resolverAddress, domain, address) {
     var node = this.namehash(domain);
     var resolver = this.PublicResolver.at(resolverAddress);
 
     return resolver.setAddr(node, address, { from: web3.eth.accounts[0] });
   },
-  setAddrForTag: function setAddr(resolverAddress, domain, address, tag) {
+  setAddrForTag: function(resolverAddress, domain, address, tag) {
     var node = this.namehash(domain);
     var resolver = this.PublicResolver.at(resolverAddress);
 
     return resolver.setAddrForTag(node, address, tag, { from: web3.eth.accounts[0] });
   },
-  getAddr: function getAddr(resolverAddress, domain) {
+  getAddr: function(resolverAddress, domain) {
     var node = this.namehash(domain);
     var resolver = this.PublicResolver.at(resolverAddress);
 
     return resolver.addr(node, { from: web3.eth.accounts[0] });
   },
-  getAddrForTag: function getAddr(resolverAddress, domain, tag) {
+  getAddrForTag: function(resolverAddress, domain, tag) {
     var node = this.namehash(domain);
     var resolver = this.PublicResolver.at(resolverAddress);
 
     return resolver.addrForTag(node, tag, { from: web3.eth.accounts[0] });
   },
-  setTagAsDefault: function setAddr(resolverAddress, domain, tag) {
+  setTagAsDefault: function(resolverAddress, domain, tag) {
     var node = this.namehash(domain);
     var resolver = this.PublicResolver.at(resolverAddress);
     var addr = this.getAddrForTag(resolverAddress, domain, tag);
