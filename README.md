@@ -4,11 +4,11 @@ A simple implementation of a public resolver that points unique names to the add
 
 ## Why it's useful?
 
-Have you ever experienced a problem with managing addresses within multiple environments (dev/test/staging/production)? Have you had a problem with synchronizing them within the team of developers? Does your infrastructure consist of smart contracts and oracles? If so, Tagged Public Resolver can be useful for you. 
+Have you ever experienced a problem with managing addresses within multiple environments (dev/test/staging/production)? Have you had a problem with synchronizing them within the team of developers? Does your infrastructure consist of smart contracts and oracles? If so, Tagged Public Resolver can be useful for you.
 
-You can deploy this contract on your own and specify names that point to specific addresses in Ethereum network. Each of address can be additionally tagged ('v1', 'test', 'dev', etc.). 
+You can deploy this contract on your own and specify names that point to specific addresses in Ethereum network. Each of address can be additionally tagged ('v1', 'test', 'dev', etc.).
 
-The contract is also compatible with [ENS (Ethereum Name Service)](https://docs.ens.domains/en/latest/implementers.html#writing-a-resolver), however during rapid development time, you don't need to register the domain, since our Utils script (described in 'Usage' section below) allows to explicitly point to resolver's address (without relying on official ENS). Once you decide that you want to register the domain, you can point your ENS domain to this resolver.  
+The contract is also compatible with [ENS (Ethereum Name Service)](https://docs.ens.domains/en/latest/implementers.html#writing-a-resolver), however during rapid development time, you don't need to register the domain, since our Utils script (described in 'Usage' section below) allows to explicitly point to resolver's address (without relying on official ENS). Once you decide that you want to register the domain, you can point your ENS domain to this resolver.
 
 ## Resolver's public interface
 
@@ -30,7 +30,7 @@ We prepared a set of helpers that make the process more straightforward.
 
 First, you have to download the `tagged-resolver-utils.js` file from this github repository which contains ABI of the contract and helper functions.
 
-Than you have to load the file. In `geth` console you can do as follows: 
+Than you have to load the file. In `geth` console you can do as follows:
 
 ```
 loadScript('./tagged-resolver-utils.js')
@@ -73,11 +73,22 @@ There is a possibility to set existing tag as default by `setTagAsDefault(resolv
 taggedResolverUtils.setTagAsDefault('0xb558248fc73bbad84ccf394d734cb12de2641ac1', 'my-awesome-contract.test.eth', 'v1');
 ```
 
+## Deployment
+
+You can simply deploy
+
+```
+$ truffle migrate --network ganache
+```
+
+You can find configuration for `ganache`, `ropsten`, `rinkeby`, and `kovan` networks in `truffle.js`.
+
 
 ## Contributing to repository
+
 Any kind of contribution is welcomed.
 
-# Found a bug? Have a question?
+## Found a bug? Have a question?
 
 1. Create a new issue, assuming one does not already exist.
 2. Clearly describe the problem including steps to reproduce when it is a bug.
