@@ -6,10 +6,11 @@ const { taggedResolverUtils } = require("../tagged-resolver-utils");
 
 contract("PublicResolver", (accounts) => {
   describe("taggedResolverUtils", () => {
-    let publicResolver;
+    let resolver, utils;
 
     beforeEach(async () => {
-      publicResolver = await PublicResolver.new();
+      resolver = (await PublicResolver.new()).address;
+      utils = taggedResolverUtils(web3);
     });
 
     const addr = accounts[0];
@@ -18,30 +19,30 @@ contract("PublicResolver", (accounts) => {
 
     describe("setAddrForTag", () => {
       it("sets an address for given tag", async () => {
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, domain, tag)).not.to.equal(addr);
-        await taggedResolverUtils.setAddrForTag(publicResolver.address, domain, addr, tag);
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, domain, tag)).to.equal(addr);
+        expect(await utils.getAddrForTag(resolver, domain, tag)).not.to.equal(addr);
+        await utils.setAddrForTag(resolver, domain, addr, tag);
+        expect(await utils.getAddrForTag(resolver, domain, tag)).to.equal(addr);
       });
     });
 
     describe("setAddr", () => {
       it("sets an address for default tag", async () => {
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, domain, "default")).not.to.equal(addr);
-        expect(await taggedResolverUtils.getAddr(publicResolver.address, domain)).not.to.equal(addr);
-        await taggedResolverUtils.setAddr(publicResolver.address, domain, addr);
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, domain, "default")).to.equal(addr);
-        expect(await taggedResolverUtils.getAddr(publicResolver.address, domain)).to.equal(addr);
+        expect(await utils.getAddrForTag(resolver, domain, "default")).not.to.equal(addr);
+        expect(await utils.getAddr(resolver, domain)).not.to.equal(addr);
+        await utils.setAddr(resolver, domain, addr);
+        expect(await utils.getAddrForTag(resolver, domain, "default")).to.equal(addr);
+        expect(await utils.getAddr(resolver, domain)).to.equal(addr);
       });
     });
 
     describe("setTagAsDefault", () => {
       it("sets a tag as default tag", async () => {
-        await taggedResolverUtils.setAddrForTag(publicResolver.address, domain, addr, "v1");
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, domain, "default")).not.to.equal(addr);
-        expect(await taggedResolverUtils.getAddr(publicResolver.address, domain)).not.to.equal(addr);
-        await taggedResolverUtils.setTagAsDefault(publicResolver.address, domain, "v1");
-        expect(await taggedResolverUtils.getAddrForTag(publicResolver.address, domain, "default")).to.equal(addr);
-        expect(await taggedResolverUtils.getAddr(publicResolver.address, domain)).to.equal(addr);
+        await utils.setAddrForTag(resolver, domain, addr, "v1");
+        expect(await utils.getAddrForTag(resolver, domain, "default")).not.to.equal(addr);
+        expect(await utils.getAddr(resolver, domain)).not.to.equal(addr);
+        await utils.setTagAsDefault(resolver, domain, "v1");
+        expect(await utils.getAddrForTag(resolver, domain, "default")).to.equal(addr);
+        expect(await utils.getAddr(resolver, domain)).to.equal(addr);
       });
     });
   });
