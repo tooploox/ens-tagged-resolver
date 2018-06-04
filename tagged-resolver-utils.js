@@ -170,12 +170,12 @@ var taggedResolverUtils = function(_web3) {
         "type": "function"
       }
     ]),
-      setAddr: function(resolverAddress, domain, address) {
-    var node = this.namehash(domain);
-    var resolver = this.PublicResolver.at(resolverAddress);
+    setAddr: function(resolverAddress, domain, address) {
+      var node = this.namehash(domain);
+      var resolver = this.PublicResolver.at(resolverAddress);
 
-    return resolver.setAddr(node, address, { from: _web3.eth.accounts[0] });
-  },
+      return resolver.setAddr(node, address, { from: _web3.eth.accounts[0] });
+    },
     setAddrForTag: function(resolverAddress, domain, address, tag) {
       var node = this.namehash(domain);
       var resolver = this.PublicResolver.at(resolverAddress);
