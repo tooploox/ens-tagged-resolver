@@ -4,7 +4,7 @@ A simple implementation of a public resolver that points unique names to the add
 
 ## Why it's useful?
 
-Have you ever experienced a problem with managing addresses withing multiple environments (dev/test/staging/production)? Have you had a problem with synchronizing them within the team of developers. Does your infrastructure consist of smart contracts and oracles? If so, Tagged Public Resolver can be useful for you. 
+Have you ever experienced a problem with managing addresses within multiple environments (dev/test/staging/production)? Have you had a problem with synchronizing them within the team of developers? Does your infrastructure consist of smart contracts and oracles? If so, Tagged Public Resolver can be useful for you. 
 
 You can deploy this contract on your own and specify names that point to specific addresses in Ethereum network. Each of address can be additionally tagged ('v1', 'test', 'dev', etc.). 
 
