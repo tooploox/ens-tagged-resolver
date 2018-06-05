@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/tooploox/ens-tagged-resolver#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "openzeppelin-solidity": "1.9.0",
     "truffle": "^4.1.11"
   },
