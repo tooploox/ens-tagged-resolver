@@ -17,6 +17,17 @@ app.get("/addresses/:domain/:tag", (req, res) => {
   res.send({ addr });
 });
 
+// An example request to the end-point:
+//
+// curl -X POST \
+//         http://localhost:3000/addresses \
+//           -H 'content-type: application/json' \
+//           -d '{
+//                 "domain": "libellum.eth",
+//                 "address": "0xF56547A13c8d62bCE5359C20f33bA570D864f01B",
+//                 "tag": "default"
+//               }'
+
 app.post("/addresses", (req, res) => {
   const txhash = resolver.setAddrForTag(RESOLVER, req.body.domain, req.body.address, req.body.tag);
   res.send({ txhash });
