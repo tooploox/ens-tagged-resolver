@@ -1,6 +1,6 @@
 # Tagged Public Resolver
 
-A simple implementation of a public resolver that points unique names to the addresses to simplify managing and synchronizing addresses within the project. This version allows you to set names together with tags as well.
+Tagged Public Resolver is a smart contract on Ethereum blockchain that points unique domain names to addresses. You can use it to simplify managing and synchronizing addresses within the project. This simple implementation of a resolver allows you to set names together with tags as well.
 
 ## Why it's useful?
 
